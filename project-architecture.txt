@@ -1,0 +1,43 @@
+# Harit Chetna - Project Architecture & Technologies
+
+This document breaks down the coding languages used in the "Harit Chetna" website and explains how all the different files are connected together.
+
+## 1. Programming Languages & Technologies Used
+
+- **TypeScript (.ts, .tsx)**: The primary programming language used. It is a strict syntactical superset of JavaScript that adds optional static typing, which makes the code more robust and less prone to errors.
+- **JavaScript (JS)**: The underlying language that powers all interactivity and compiles down from TypeScript.
+- **HTML / JSX Engine**: Uses React’s JSX (written as `.tsx`), which allows us to write HTML directly inside our JavaScript/TypeScript files.
+- **CSS**: specifically **Tailwind CSS**, a utility-first CSS framework (used in `globals.css` and via Tailwind utility classes like `className="text-xl font-bold"`).
+- **Next.js (React Framework)**: The core engine of the entire website. It handles the routing, rendering (Server-Side and Client-Side), and optimizations natively.
+- **Sanity.io**: A headless CMS (Content Management System) used as the backend database for dynamic content (like Blog Posts and Magazine Issues).
+
+---
+
+## 2. How the Files Are Connected (The Architecture)
+
+### 🟢 The Root & Setup
+- **`package.json`**: The heart of the project. It tracks all the installed libraries (like `next`, `react`, `sanity`, `tailwindcss`) and the commands to run the project (like `npm run dev`).
+- **`src/app/layout.tsx`**: This is the global wrapper for the entire application. It imports the global fonts (**Inter** and **Playfair Display**) and standardizes the page structure by always showing the `<Navbar />` at the top and the `<Footer />` at the bottom, wrapping around whichever specific page you're currently visiting.
+- **`src/app/globals.css`**: The global CSS file where Tailwind CSS is injected, and where theme variables (colors, fonts) are universally defined.
+
+### 🏠 The Pages (Routing)
+- **`src/app/page.tsx`**: The Homepage. This is what you see at `localhost:3000`. It acts as the "conductor" for the homepage, importing and displaying the Hero Slider, the About Section, and the Daily Updates section.
+
+### 🧩 The UI Components
+Components are reusable blocks of code. `page.tsx` pulls them in.
+- **`src/components/HeroSlider.tsx`**: The interactive 3D slider we created. It manages its own interactive state (timer and current slide) using React's `useState` and `useEffect`.
+- **`src/components/layout/Navbar.tsx`**: The top navigation bar containing the logo, Harit Chetna title, ISSN number placeholder, and links to other pages. 
+- **`src/components/CurrentIssuePDF.tsx`**: A component designed to display the latest magazine issue cover and a button to download the PDF.
+
+### 🗄️ The Backend (Sanity CMS)
+The content system is entirely separated from the frontend interface.
+- **`src/sanity/schemas/...`**: This folder contains files like `blogPost.ts`, `magazineIssue.ts`, and `editorialBoardMember.ts`. These files define exactly what a database item should look like (e.g., "A blog post must have a title, content, and an image").
+- **`src/sanity/queries.ts`**: This file contains the "GROQ" queries. It acts as the messenger. When `page.tsx` or another page needs data, it uses these exact queries to knock on Sanity's door and ask for "the latest 5 blog posts" or "the newest magazine PDF."
+
+## Summary Flow
+1. A user visits the website.
+2. Next.js runs **`layout.tsx`**, rendering the **Navbar**.
+3. Next.js loads the route: **`page.tsx`**.
+4. **`page.tsx`** imports and runs **`HeroSlider.tsx`** (showing the images from the `public/` folder).
+5. If dynamic data is needed, Next.js fires the queries inside **`queries.ts`** to fetch data from the structure defined in **`schemas/`**.
+6. The user browses a seamless, beautifully styled, interactive 3D webpage.

@@ -1,0 +1,47 @@
+{
+  "editorInChief": [
+    {
+      "name": "Dr. A. Sharma",
+      "affiliation": "Professor of Agronomy, National Agriculture Institute",
+      "photo": ""
+    }
+  ],
+  "managingEditors": [
+    {
+      "name": "Prof. R. Kumar",
+      "affiliation": "Head, Department of Soil Science",
+      "photo": ""
+    }
+  ],
+  "associateEditors": [
+    {
+      "name": "Dr. S. Patil",
+      "affiliation": "Senior Scientist, Plant Breeding Institute",
+      "photo": ""
+    },
+    {
+      "name": "Dr. K. Verma",
+      "affiliation": "Specialist in Horticulture",
+      "photo": ""
+    }
+  ],
+  "boardMembers": [
+    {
+      "name": "Dr. M. Singh",
+      "affiliation": "Agricultural Extension, NAARM",
+      "photo": ""
+    },
+    {
+      "name": "Prof. N. Rao",
+      "affiliation": "Fisheries and Aquaculture",
+      "photo": ""
+    }
+  ],
+  "technicalAdvisors": [
+    {
+      "name": "Mr. Anil Das",
+      "affiliation": "Agri-Tech Consultant",
+      "photo": ""
+    }
+  ]
+}
