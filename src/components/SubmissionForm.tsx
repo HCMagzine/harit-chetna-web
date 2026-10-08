@@ -23,7 +23,7 @@ export function SubmissionForm() {
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || "Your submission could not be sent. Please try again.");
+        throw new Error(result.error || result.message || "Your submission could not be sent. Please try again.");
       }
 
       form.reset();
@@ -52,7 +52,7 @@ export function SubmissionForm() {
           Email: <a className="break-all font-semibold text-emerald-800 underline dark:text-emerald-300" href="mailto:Editor.haritchetna@gmail.com">Editor.haritchetna@gmail.com</a>
         </p>
         <p className="text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">
-          Pay the publication/processing fee via UPI to 9984149456, upload the payment screenshot along with your manuscript (.doc/.docx/.pdf), and click Submit Article.
+          Transfer publication/processing fee via UPI to 9984149456 (PhonePe / Google Pay / Paytm), take a screenshot, attach it below along with your manuscript, and click Submit Article.
         </p>
       </section>
 
@@ -84,8 +84,8 @@ export function SubmissionForm() {
 
       <div className="space-y-4 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
         <div className="space-y-2">
-          <Label htmlFor="manuscript" className="font-semibold text-emerald-800 dark:text-emerald-400">Manuscript (.doc, .docx, or .pdf) <span className="text-red-500">*</span></Label>
-          <Input id="manuscript" name="manuscript" type="file" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" required />
+          <Label htmlFor="manuscriptFile" className="font-semibold text-emerald-800 dark:text-emerald-400">Manuscript (.doc, .docx, or .pdf) <span className="text-red-500">*</span></Label>
+          <Input id="manuscriptFile" name="manuscriptFile" type="file" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="paymentReceipt" className="font-semibold text-emerald-800 dark:text-emerald-400">Payment Receipt / Screenshot (image or PDF) <span className="text-red-500">*</span></Label>
@@ -101,7 +101,7 @@ export function SubmissionForm() {
 
       <Button type="submit" disabled={isSubmitting} className="w-full bg-emerald-700 py-6 text-lg text-white hover:bg-emerald-800">
         {isSubmitting && <LoaderCircle aria-hidden="true" className="animate-spin" />}
-        {isSubmitting ? "Uploading..." : "Submit Article"}
+        {isSubmitting ? "Uploading Manuscript & Payment Receipt..." : "Submit Article"}
       </Button>
     </form>
   );

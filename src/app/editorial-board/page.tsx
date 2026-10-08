@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { client } from "@/sanity/lib/client";
 
+export const revalidate = 60;
+
 interface Member {
   _id: string;
   name: string;

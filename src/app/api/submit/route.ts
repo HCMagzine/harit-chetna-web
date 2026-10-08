@@ -9,7 +9,11 @@ const json = (body: { success: boolean; message: string }, status = 200) =>
 export async function POST(request: Request) {
   const token = process.env.SANITY_API_WRITE_TOKEN;
   if (!token) {
-    return json({ success: false, message: "Submission is temporarily unavailable. Please contact the editorial team." }, 500);
+    console.warn("SANITY_API_WRITE_TOKEN is missing; submission writes are disabled.");
+    return Response.json(
+      { success: false, error: "Server missing write permissions" },
+      { status: 500 },
+    );
   }
 
   try {
@@ -19,7 +23,7 @@ export async function POST(request: Request) {
     const email = formData.get("email");
     const articleTitle = formData.get("articleTitle");
     const message = formData.get("message");
-    const manuscript = formData.get("manuscript");
+    const manuscript = formData.get("manuscriptFile");
     const paymentReceipt = formData.get("paymentReceipt");
 
     if (
@@ -46,17 +50,19 @@ export async function POST(request: Request) {
       return json({ success: false, message: "The payment receipt must be an image or PDF file." }, 400);
     }
 
-    const client = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
-    const manuscriptAsset = await client.assets.upload("file", manuscript, {
-      filename: manuscript.name,
-      contentType: manuscript.type || "application/octet-stream",
-    });
-    const receiptAsset = await client.assets.upload("file", paymentReceipt, {
-      filename: paymentReceipt.name,
-      contentType: paymentReceipt.type || "application/octet-stream",
-    });
+    const sanityWriteClient = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
+    const [manuscriptAsset, receiptAsset] = await Promise.all([
+      sanityWriteClient.assets.upload("file", manuscript, {
+        filename: manuscript.name,
+        contentType: manuscript.type || "application/octet-stream",
+      }),
+      sanityWriteClient.assets.upload("file", paymentReceipt, {
+        filename: paymentReceipt.name,
+        contentType: paymentReceipt.type || "application/octet-stream",
+      }),
+    ]);
 
-    await client.create({
+    await sanityWriteClient.create({
       _type: "submission",
       authorName: `${firstName.trim()} ${lastName.trim()}`,
       authorEmail: email.trim(),
@@ -68,9 +74,12 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     });
 
-    return json({ success: true, message: "Submission received successfully" });
+    return json({ success: true, message: "Manuscript submitted successfully!" });
   } catch (error) {
     console.error("Article submission failed:", error);
-    return json({ success: false, message: "Your submission could not be sent. Please try again later." }, 500);
+    return Response.json(
+      { success: false, error: "Your submission could not be sent. Please try again later." },
+      { status: 500 },
+    );
   }
 }

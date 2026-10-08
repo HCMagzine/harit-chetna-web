@@ -5,6 +5,8 @@ import { BlogCard } from '@/components/BlogCard';
 import { HeroSlider } from '@/components/HeroSlider';
 import { Leaf, Microscope, Tractor, Droplets, Sprout, Sun } from "lucide-react";
 
+export const revalidate = 60;
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">

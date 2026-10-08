@@ -4,12 +4,12 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
 import { client } from "@/sanity/lib/client";
-import { ALL_POSTS_QUERY, POST_BY_SLUG_QUERY } from "@/lib/queries";
+import { POST_BY_SLUG_QUERY, POST_SLUGS_QUERY } from "@/lib/queries";
 
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const articles = await client.fetch<Array<{ slug?: string }>>(ALL_POSTS_QUERY);
+  const articles = await client.fetch<Array<{ slug?: string }>>(POST_SLUGS_QUERY);
   return articles.flatMap(({ slug }) => (slug ? [{ slug }] : []));
 }
 
