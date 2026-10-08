@@ -1,8 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { SubmissionForm } from "@/components/SubmissionForm";
 
 export default function SubmitContactPage() {
   return (
@@ -48,8 +45,8 @@ export default function SubmitContactPage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-emerald-900 dark:text-emerald-300 mb-1">Phone / WhatsApp</h4>
-                    <p className="text-muted-foreground text-sm mb-1">+91 7009571328</p>
-                    <p className="text-muted-foreground text-sm">+91 8152069607</p>
+                    <p className="text-muted-foreground text-sm mb-1">+91 9984149456</p>
+                    <p className="text-muted-foreground text-sm">+91 7009571328</p>
                   </div>
                 </div>
               </CardContent>
@@ -74,55 +71,7 @@ export default function SubmitContactPage() {
                   Please fill out the details below and attach your manuscript along with the payment receipt.
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <form className="space-y-6">
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" className="focus-visible:ring-emerald-500" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Doe" className="focus-visible:ring-emerald-500" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address <span className="text-red-500">*</span></Label>
-                    <Input id="email" type="email" placeholder="john.doe@example.com" required className="focus-visible:ring-emerald-500" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Article Title <span className="text-red-500">*</span></Label>
-                    <Input id="title" placeholder="Title of your manuscript" required className="focus-visible:ring-emerald-500" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message to Editor (Optional)</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Any additional information..."
-                      className="min-h-[100px] focus-visible:ring-emerald-500"
-                    />
-                  </div>
-
-                  <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="manuscript" className="font-semibold text-emerald-800 dark:text-emerald-400">Upload Manuscript (Word .doc/.docx format)</Label>
-                      <Input id="manuscript" type="file" className="cursor-pointer file:text-emerald-700 file:bg-emerald-50 file:border-0 file:rounded-md file:px-4 file:py-1 hover:file:bg-emerald-100" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="receipt" className="font-semibold text-emerald-800 dark:text-emerald-400">Upload Payment Receipt/Screenshot</Label>
-                      <Input id="receipt" type="file" className="cursor-pointer file:text-emerald-700 file:bg-emerald-50 file:border-0 file:rounded-md file:px-4 file:py-1 hover:file:bg-emerald-100" />
-                    </div>
-                  </div>
-
-                  <Button type="button" className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-6 text-lg">
-                    Submit Article
-                  </Button>
-                </form>
-              </CardContent>
+              <CardContent><SubmissionForm /></CardContent>
             </Card>
           </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const slides = [
@@ -47,9 +48,11 @@ export function HeroSlider() {
 
       {/* Content */}
       <div className="container mx-auto relative z-10 flex flex-col items-center">
-        <img
+        <Image
           src="/logo.png"
           alt="Harit Chetna Logo"
+          width={507}
+          height={302}
           className="h-32 md:h-40 w-auto mb-6 animate-in zoom-in duration-700 drop-shadow-2xl"
         />
 
@@ -67,7 +70,7 @@ export function HeroSlider() {
         </h2>
 
         <p className="text-xl md:text-3xl font-light mb-10 max-w-3xl mx-auto opacity-95 text-emerald-50 drop-shadow-md">
-          "Cultivating Knowledge, Empowering Agriculture" 🚜🌱
+          &ldquo;Cultivating Knowledge, Empowering Agriculture&rdquo; 🚜🌱
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-6 w-full max-w-md mx-auto sm:max-w-none">

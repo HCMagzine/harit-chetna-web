@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 
@@ -28,9 +29,11 @@ export function CurrentIssuePDF({
       {/* Cover Image */}
       <div className="relative w-48 h-64 md:w-64 md:h-80 flex-shrink-0 rounded-lg overflow-hidden border shadow-inner">
         {coverImageUrl ? (
-          <img
+          <Image
             src={coverImageUrl}
             alt={`Cover of Vol ${volumeNumber} Issue ${issueNumber}`}
+            fill
+            sizes="(max-width: 768px) 192px, 256px"
             className="w-full h-full object-cover"
           />
         ) : (

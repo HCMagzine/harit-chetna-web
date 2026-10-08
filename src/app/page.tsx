@@ -70,7 +70,7 @@ export default function Home() {
               The magazine provides a platform for researchers, scientists, agripreneurs, progressive farmers, and start-ups to share innovations, success stories, and practical solutions. It covers a wide range of disciplines including agronomy, horticulture, soil science, plant breeding and protection, animal husbandry, fisheries, sericulture, irrigation science, agri-business management, biotechnology, environmental sciences, and allied sectors. Special emphasis is placed on sustainable farming practices, climate-resilient technologies, precision agriculture, post-harvest innovations, and government-supported schemes that can improve rural livelihoods.
             </p>
             <p className="font-semibold italic text-emerald-900 dark:text-emerald-100 text-xl border-l-4 border-emerald-500 pl-6 my-8">
-              "By bridging critical information gaps and promoting technology-driven solutions, Harit Chetna aspires to transform agriculture into a progressive, innovative, and sustainable sector, ensuring the prosperity and resilience of rural India."
+              &ldquo;By bridging critical information gaps and promoting technology-driven solutions, Harit Chetna aspires to transform agriculture into a progressive, innovative, and sustainable sector, ensuring the prosperity and resilience of rural India.&rdquo;
             </p>
           </div>
         </div>

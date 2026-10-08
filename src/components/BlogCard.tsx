@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 interface BlogCardProps {
   title: string;
@@ -29,9 +30,11 @@ export function BlogCard({ title, excerpt, date, imageUrl, youtubeUrl }: BlogCar
             className="w-full h-full border-0"
           />
         ) : imageUrl ? (
-          <img 
+          <Image
             src={imageUrl} 
             alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

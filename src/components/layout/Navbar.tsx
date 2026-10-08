@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
@@ -13,7 +14,7 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center space-x-3 transition-transform hover:scale-105">
-            <img src="/logo.png" alt="Harit Chetna Logo" className="h-12 w-auto object-contain drop-shadow-sm" />
+            <Image src="/logo.png" alt="Harit Chetna Logo" width={507} height={302} className="h-12 w-auto object-contain drop-shadow-sm" />
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-foreground">
                 Harit Chetna
@@ -33,6 +34,9 @@ export function Navbar() {
             <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
               Home
             </Link>
+            <Link href="/about" className="text-sm font-medium transition-colors hover:text-primary">
+              About
+            </Link>
             <Link href="/editorial-board" className="text-sm font-medium transition-colors hover:text-primary">
               Editorial Board
             </Link>
@@ -45,7 +49,7 @@ export function Navbar() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="/submit-contact">
+          <Link href="/submit">
             <Button className="hover:scale-105 transition-transform bg-primary text-primary-foreground">
               Submit Article
             </Button>

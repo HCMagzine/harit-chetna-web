@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import Image from "next/image";
 import { PortableText } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
 import { client } from "@/sanity/lib/client";
@@ -29,6 +31,34 @@ type Article = {
   pdfDescription?: string;
   categories?: Array<{ title?: string }>;
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await client.fetch<Article | null>(POST_BY_SLUG_QUERY, { slug });
+
+  if (!article) return { title: "Article not found | Harit Chetna" };
+
+  const authors = [article.author?.name, ...(article.coAuthors || []).map((author) => author.name)]
+    .filter((name): name is string => Boolean(name));
+
+  return {
+    title: article.title,
+    description: article.subtitle,
+    other: {
+      citation_title: article.title,
+      ...(authors.length ? { citation_author: authors } : {}),
+      ...(article.publishedAt ? { citation_publication_date: article.publishedAt.slice(0, 10).replace(/-/g, "/") } : {}),
+      citation_journal_title: "Harit Chetna",
+      ...(article.volume ? { citation_volume: article.volume } : {}),
+      ...(article.issue ? { citation_issue: article.issue } : {}),
+      ...(article.pdfUrl ? { citation_pdf_url: article.pdfUrl } : {}),
+    },
+  };
+}
 
 function formatPublicationDate(date?: string) {
   return date
@@ -90,10 +120,12 @@ export default async function ArticlePage({
 
       {article.mainImage?.url && (
         <figure className="my-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={article.mainImage.url}
             alt={article.mainImage.alt || ""}
+            width={1200}
+            height={800}
+            sizes="(max-width: 896px) 100vw, 896px"
             className="max-h-[34rem] w-full rounded-xl object-cover"
           />
           {article.mainImage.caption && (
