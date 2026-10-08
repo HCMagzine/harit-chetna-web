@@ -20,18 +20,21 @@ export function SubmissionForm() {
 
     try {
       const response = await fetch("/api/submit", { method: "POST", body: formData });
-      const result = await response.json();
+      const result = await response.json().catch(() => null);
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || result.message || "Your submission could not be sent. Please try again.");
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.error || result?.message || "Your submission could not be sent. Please try again.");
       }
 
       form.reset();
-      setFeedback({ type: "success", message: result.message });
+      setFeedback({
+        type: "success",
+        message: "Your manuscript and payment receipt have been uploaded successfully! Our editorial team will review your submission directly in the editorial inbox.",
+      });
     } catch (error) {
       setFeedback({
         type: "error",
-        message: error instanceof Error ? error.message : "Your submission could not be sent. Please try again.",
+        message: `${error instanceof Error ? error.message : "Your submission could not be sent. Please try again."} For assistance, email Editor.haritchetna@gmail.com or call +91 9984149456.`,
       });
     } finally {
       setIsSubmitting(false);
