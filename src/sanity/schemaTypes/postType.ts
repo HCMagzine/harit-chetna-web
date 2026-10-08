@@ -94,7 +94,7 @@ export const postType = defineType({
           name: 'description',
           type: 'string',
           title: 'Button Label',
-          initialValue: 'Download Full PDF Paper',
+          initialValue: 'Download Full PDF Article',
         }),
       ],
     }),
